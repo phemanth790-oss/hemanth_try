@@ -1,0 +1,82 @@
+h2 {
+    color:red;
+        text-decoration: blue wavy underline 
+}
+h3 {
+    background-color: blue;
+}
+body {
+    background-color: white;
+}
+h3{
+    color: brown;
+    text-decoration:underline;
+}
+/*
+   text-decoration:overline
+   text-decoration:line-through
+   */
+
+#heading1{ 
+    color: purple;
+}
+
+.myClass{
+    color:navy
+}
+
+#box{
+    background-color: blue;
+    color:white;
+}
+
+.heading{
+    color:red;
+}
+
+button{
+    background-color:green
+}
+/*
+p{
+    text-align:right
+}
+*/
+p{
+  /* text-align:left */
+  line-height: normal;
+  text-transform:capitalize;
+
+}
+/*
+p{
+    text-align:center
+}
+*/    
+h1{
+    font-weight: normal;
+}
+
+h2{
+    font-weight: bold;
+}
+
+h3{
+    font-weight: bolder;
+}
+
+h4{
+    font-weight: lighter;
+}
+
+#one{
+    font-family: Arial;
+}
+
+#one{
+    font-size: 25px;
+}
+
+#three{
+    font-size:10px;
+}

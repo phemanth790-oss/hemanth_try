@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f3f6;
+        }
+        
+        /* Custom Scrollbar for horizontal lists */
+        .hide-scroll::-webkit-scrollbar {
+        
+            display: none;
+        }
+        .hide-scroll {
+        
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Flipkart Blue */
+        .fk-blue {
+            background-color: #2874f0;
+        }
+        .text-fk-blue {
+            color: #2874f0;
+        }
+
+        /* Hover Effects */
+        .category-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        /* Slider Animation */
+        @keyframes slide {
+            0% { opacity: 0; transform: translateX(20px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-[#f1f3f6] text-gray-800">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="sticky top-0 z-50 fk-blue text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between gap-4 md:gap-8">
+            
+            <!-- Logo -->
+            <a href="#" class="flex flex-col items-start group">
+                <span class="text-xl font-bold italic tracking-tighter">Flipkart</span>
+                <div class="flex items-center text-xs italic text-gray-200 group-hover:text-yellow-300 transition-colors">
+                    Explore <span class="text-yellow-300 font-semibold ml-1">Plus</span> <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/plus_aef861.png" alt="plus" class="w-2.5 h-2.5 ml-1">
+                </div>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-2xl relative hidden sm:block">
+                <input type="text" placeholder="Search for products, brands and more" 
+                    class="w-full py-2 px-4 pr-10 rounded-sm text-gray-700 focus:outline-none shadow-sm text-sm">
+                <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-fk-blue">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+            <!-- Nav Actions -->
+            <div class="flex items-center gap-6 text-sm font-medium">
+                <button class="bg-white text-fk-blue px-6 py-1.5 rounded-sm font-semibold hover:bg-[#2874f0] hover:text-white border border-white transition-all duration-200">
+                    Login
+                </button>
+                
+                <div class="hidden md:flex items-center gap-1 cursor-pointer hover:text-gray-200">
+                    <span>Become a Seller</span>
+                </div>
+
+                <div class="hidden md:flex items-center gap-1 cursor-pointer hover:text-gray-200 group relative">
+                    <span>More</span>
+                    <i class="fa-solid fa-angle-down text-xs mt-0.5 group-hover:rotate-180 transition-transform"></i>
+                    <!-- Dropdown -->
+                    <div class="absolute top-8 left-1/2 -translate-x-1/2 bg-white text-gray-800 w-48 shadow-lg rounded-sm py-2 hidden group-hover:block z-50 animate-fade-in">
+                        <div class="px-4 py-2 hover:bg-gray-50 flex items-center gap-3"><i class="fa-solid fa-bell"></i> Notification Preferences</div>
+                        <div class="px-4 py-2 hover:bg-gray-50 flex items-center gap-3"><i class="fa-solid fa-headset"></i> 24x7 Customer Care</div>
+                        <div class="border-t my-1"></div>
+                        <div class="px-4 py-2 hover:bg-gray-50 flex items-center gap-3"><i class="fa-solid fa-right-from-bracket"></i> Log Out</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-1 cursor-pointer hover:text-gray-200">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Cart</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Search (Visible only on small screens) -->
+        <div class="sm:hidden px-4 pb-3">
+            <div class="relative">
+                <input type="text" placeholder="Search for products..." class="w-full py-2 px-4 pr-10 rounded-sm text-gray-700 text-sm">
+                <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-fk-blue">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- CATEGORY BAR -->
+    <nav class="bg-white shadow-sm py-3 sticky top-[76px] z-40 hidden md:block">
+        <div class="container mx-auto px-4">
+            <ul class="flex justify-between items-center text-sm font-medium text-gray-700">
+                <li class="group cursor-pointer flex flex-col items-center gap-1">
+                    <img src="https://rukminim1.flixcart.com/flap/80/80/image/29327f40e9c4d26b.png?q=100" class="w-14 h-14 object-contain group-hover:scale-105 transition-transform" alt="Grocery">
+                    <span class="group-hover:text-fk-blue">Top Offers</span>
+                </li>
+                <li class="group cursor-pointer flex flex-col items-center gap-1">
+                    <img src="https://rukminim1.flixcart.com/flap/80/80/image/22fddf3c7da4c4f4.png?q=100" class="w-14 h-14 object-contain group-hover:scale-105 transition-transform" alt="Mobiles">
+                    <span class="group-hover:text-fk-blue">Mobiles</span>
+                </li>
+                <li class="group cursor-pointer flex flex-col items-center gap-1">
+                    <img src="https://rukminim1.flixcart.com/flap/80/80/image/c12afc017e6f24cb.png?q=100" class="w-14 h-14 object-contain group-hover:scale-105 transition-transform" alt="Electronics">
+                    <span class="group-hover:text-fk-blue">Electronics</span>
+                </li>
+                <li class="group cursor-pointer flex flex-col items-center gap-1">
+                    <img src="https://rukminim1.flixcart.com/flap/80/80/image/69c6589653afdb9a.png?q=100" class="w-14 h-14 object-contain group-hover:scale-105 transition-transform" alt="TVs">
+                    <span class="group-hover:text-fk-blue">TVs & Appliances</span>
+                </li>
+                <li class="group cursor-pointer flex flex-col items-center gap-1">
+                    <img src="https://rukminim1.flixcart.com/flap/80/80/image/ab7e2b022a4587dd.jpg?q=100" class="w-14 h-14 object-contain group-hover:scale-105 transition-transform" alt="Fashion">
+                    <span class="group-hover:text-fk-blue">Fashion</span>
+                </li>
+                <li class="group cursor-pointer flex flex-col items-center gap-1">
+                    <img src="https://rukminim1.flixcart.com/flap/80/80/image/0ff199d1bd27eb98.png?q=100" class="w-14 h-14 object-contain group-hover:scale-105 transition-transform" alt="Beauty">
+                    <span class="group-hover:text-fk-blue">Beauty</span>
+                </li>
+                <li class="group cursor-pointer flex flex-col items-center gap-1">
+                    <img src="https://rukminim1.flixcart.com/flap/80/80/image/71050627a56b4693.png?q=100" class="w-14 h-14 object-contain group-hover:scale-105 transition-transform" alt="Home">
+                    <span class="group-hover:text-fk-blue">Home & Kitchen</span>
+                </li>
+                <li class="group cursor-pointer flex flex-col items-center gap-1">
+                    <img src="https://rukminim1.flixcart.com/flap/80/80/image/dff3f7adcf3a90c6.png?q=100" class="w-14 h-14 object-contain group-hover:scale-105 transition-transform" alt="Furniture">
+                    <span class="group-hover:text-fk-blue">Furniture</span>
+                </li>
+                <li class="group cursor-pointer flex flex-col items-center gap-1">
+                    <img src="https://rukminim1.flixcart.com/flap/80/80/image/29327f40e9c4d26b.png?q=100" class="w-14 h-14 object-contain group-hover:scale-105 transition-transform" alt="Flights">
+                    <span class="group-hover:text-fk-blue">Flights</span>
+                </li>
+                 <li class="group cursor-pointer flex flex-col items-center gap-1">
+                    <img src="https://rukminim1.flixcart.com/flap/80/80/image/29327f40e9c4d26b.png?q=100" class="w-14 h-14 object-contain group-hover:scale-105 transition-transform" alt="Offer">
+                    <span class="group-hover:text-fk-blue">Offer Zone</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mx-auto px-2 md:px-4 py-4 space-y-4">
+
+        <!-- HERO BANNER SLIDER -->
+        <section class="relative w-full h-40 md:h-72 bg-white rounded-sm overflow-hidden shadow-sm group slider-container">
+            <div id="hero-slider" class="flex transition-transform duration-500 ease-in-out h-full">
+                <!-- Slide 1 -->
+                <div class="min-w-full h-full relative">
+                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover" alt="Sale">
+                    <div class="absolute bottom-0 left-0 bg-black/30 w-full p-4 text-white">
+                        <h2 class="text-2xl font-bold">Big Billion Days</h2>
+                        <p>Up to 80% Off on Electronics</p>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="min-w-full h-full relative">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover" alt="Fashion">
+                    <div class="absolute bottom-0 left-0 bg-black/30 w-full p-4 text-white">
+                        <h2 class="text-2xl font-bold">Fashion Top Picks</h2>
+                        <p>Min 50% Off on Top Brands</p>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="min-w-full h-full relative">
+                    <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover" alt="Tech">
+                    <div class="absolute bottom-0 left-0 bg-black/30 w-full p-4 text-white">
+                        <h2 class="text-2xl font-bold">Latest Gadgets</h2>
+                        <p>Upgrade your tech today</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controls -->
+            <button onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow-md hover:bg-white opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                <i class="fa-solid fa-chevron-left text-gray-800"></i>
+            </button>
+            <button onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow-md hover:bg-white opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                <i class="fa-solid fa-chevron-right text-gray-800"></i>
+            </button>
+        </section>
+
+        <!-- BANK OFFER STRIP -->
+        <section class="bg-white p-2 rounded-sm shadow-sm flex overflow-x-auto hide-scroll gap-4 items-center">
+            <div class="flex items-center gap-2 min-w-max px-4 border-r border-gray-200">
+                <span class="font-bold text-gray-700">Bank Offer</span>
+            </div>
+            <div class="flex items-center gap-2 min-w-max px-4 border-r border-gray-200 cursor-pointer hover:bg-gray-50">
+                <img src="https://rukminim1.flixcart.com/fk-p-flap/100/100/image/2a4d9205322f4622.jpeg?q=60" class="h-8" alt="HDFC">
+                <span class="text-xs font-medium">10% Instant Discount</span>
+            </div>
+             <div class="flex items-center gap-2 min-w-max px-4 border-r border-gray-200 cursor-pointer hover:bg-gray-50">
+                <img src="https://rukminim1.flixcart.com/fk-p-flap/100/100/image/2a4d9205322f4622.jpeg?q=60" class="h-8" alt="ICICI">
+                <span class="text-xs font-medium">5% Cashback</span>
+            </div>
+             <div class="flex items-center gap-2 min-w-max px-4 cursor-pointer hover:bg-gray-50">
+                <img src="https://rukminim1.flixcart.com/fk-p-flap/100/100/image/2a4d9205322f4622.jpeg?q=60" class="h-8" alt="SBI">
+                <span class="text-xs font-medium">Extra ₹1500 Off</span>
+            </div>
+        </section>
+
+        <!-- DEALS SECTION (Horizontal Scroll) -->
+        <section class="bg-white rounded-sm shadow-sm p-4">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-800">Best of Electronics</h2>
+                <button class="bg-fk-blue text-white px-4 py-2 text-sm font-semibold rounded-sm uppercase shadow hover:shadow-lg transition-shadow">View All</button>
+            </div>
+            
+            <div class="flex overflow-x-auto hide-scroll gap-6 pb-4">
+                <!-- Product Card 1 -->
+                <div class="min-w-[180px] w-[180px] flex flex-col items-center text-center group cursor-pointer">
+                    <div class="h-40 w-full flex items-center justify-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="max-h-full object-contain group-hover:scale-105 transition-transform" alt="Phone">
+                    </div>
+                    <h3 class="text-sm font-medium text-gray-800 truncate w-full">Top Smartphones</h3>
+                    <p class="text-green-600 text-xs font-bold mt-1">From ₹6,999</p>
+                    <p class="text-gray-500 text-xs mt-1">Samsung, Realme, Poco</p>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="min-w-[180px] w-[180px] flex flex-col items-center text-center group cursor-pointer">
+                    <div class="h-40 w-full flex items-center justify-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1543512214-318c77a073ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="max-h-full object-contain group-hover:scale-105 transition-transform" alt="Laptop">
+                    </div>
+                    <h3 class="text-sm font-medium text-gray-800 truncate w-full">Laptops</h3>
+                    <p class="text-green-600 text-xs font-bold mt-1">Up to 40% Off</p>
+                    <p class="text-gray-500 text-xs mt-1">MacBook, HP, Dell</p>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="min-w-[180px] w-[180px] flex flex-col items-center text-center group cursor-pointer">
+                    <div class="h-40 w-full flex items-center justify-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="max-h-full object-contain group-hover:scale-105 transition-transform" alt="Headphones">
+                    </div>
+                    <h3 class="text-sm font-medium text-gray-800 truncate w-full">Premium Headphones</h3>
+                    <p class="text-green-600 text-xs font-bold mt-1">Starting ₹499</p>
+                    <p class="text-gray-500 text-xs mt-1">Sony, JBL, Boat</p>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="min-w-[180px] w-[180px] flex flex-col items-center text-center group cursor-pointer">
+                    <div class="h-40 w-full flex items-center justify-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="max-h-full object-contain group-hover:scale-105 transition-transform" alt="Camera">
+                    </div>
+                    <h3 class="text-sm font-medium text-gray-800 truncate w-full">DSLR & Action Cams</h3>
+                    <p class="text-green-600 text-xs font-bold mt-1">Top Deals</p>
+                    <p class="text-gray-500 text-xs mt-1">Canon, GoPro</p>
+                </div>
+                
+                 <!-- Product Card 5 -->
+                <div class="min-w-[180px] w-[180px] flex flex-col items-center text-center group cursor-pointer">
+                    <div class="h-40 w-full flex items-center justify-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1588872657578-a3d2af14c22c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="max-h-full object-contain group-hover:scale-105 transition-transform" alt="Watch">
+                    </div>
+                    <h3 class="text-sm font-medium text-gray-800 truncate w-full">Smart Watches</h3>
+                    <p class="text-green-600 text-xs font-bold mt-1">Min 90% Off</p>
+                    <p class="text-gray-500 text-xs mt-1">Noise, Fire-Boltt</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRID LAYOUT SECTIONS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            
+            <!-- Block 1: Fashion -->
+            <div class="bg-white p-4 rounded-sm shadow-sm flex flex-col">
+                <h3 class="text-lg font-bold mb-4 pb-2 border-b border-gray-100">Trending in Fashion</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Shoes">
+                        <span class="text-sm font-medium">Nike Shoes</span>
+                        <span class="text-green-600 text-xs">Min 40% Off</span>
+                    </div>
+                    <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Jackets">
+                        <span class="text-sm font-medium">Winter Wear</span>
+                        <span class="text-green-600 text-xs">Under ₹999</span>
+                    </div>
+                    <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1551488852-080175b22345?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Jeans">
+                        <span class="text-sm font-medium">Levis Jeans</span>
+                        <span class="text-green-600 text-xs">Flat 50% Off</span>
+                    </div>
+                     <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Tshirts">
+                        <span class="text-sm font-medium">Printed T-Shirts</span>
+                        <span class="text-green-600 text-xs">From ₹199</span>
+                    </div>
+                </div>
+                <button class="mt-4 text-fk-blue text-sm font-semibold uppercase hover:underline text-left">See all offers</button>
+            </div>
+
+            <!-- Block 2: Beauty -->
+            <div class="bg-white p-4 rounded-sm shadow-sm flex flex-col">
+                <h3 class="text-lg font-bold mb-4 pb-2 border-b border-gray-100">Beauty & Grooming</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdd403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Makeup">
+                        <span class="text-sm font-medium">Maybelline, Lakme</span>
+                        <span class="text-green-600 text-xs">Up to 35% Off</span>
+                    </div>
+                    <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Perfume">
+                        <span class="text-sm font-medium">Premium Fragrances</span>
+                        <span class="text-green-600 text-xs">Best Sellers</span>
+                    </div>
+                    <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1556228720-19de77d61e6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Trimmer">
+                        <span class="text-sm font-medium">Philips Trimmers</span>
+                        <span class="text-green-600 text-xs">Top Rated</span>
+                    </div>
+                     <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Skincare">
+                        <span class="text-sm font-medium">Skincare Essentials</span>
+                        <span class="text-green-600 text-xs">Min 20% Off</span>
+                    </div>
+                </div>
+                <button class="mt-4 text-fk-blue text-sm font-semibold uppercase hover:underline text-left">See all offers</button>
+            </div>
+
+             <!-- Block 3: Home -->
+             <div class="bg-white p-4 rounded-sm shadow-sm flex flex-col">
+                <h3 class="text-lg font-bold mb-4 pb-2 border-b border-gray-100">Home Furnishing</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1522771753033-6a586611c745?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Bed">
+                        <span class="text-sm font-medium">Double Beds</span>
+                        <span class="text-green-600 text-xs">From ₹12,999</span>
+                    </div>
+                    <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Pillows">
+                        <span class="text-sm font-medium">Comfort Pillows</span>
+                      <span class="text-green-600 text-xs">Under ₹0 </span>
+                    </div>
+                    <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Decor">
+                        <span class="text-sm font-medium">Wall Decor</span>
+                        <span class="text-green-600 text-xs">Min 50% Off</span>
+                    </div>
+                     <div class="flex flex-col items-center group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="h-32 w-full object-cover mb-2 group-hover:opacity-90" alt="Lighting">
+                        <span class="text-sm font-medium">LED Bulbs</span>
+                        <span class="text-green-600 text-xs">Pack of 4</span>
+                    </div>
+                </div>
+                <button class="mt-4 text-fk-blue text-sm font-semibold uppercase hover:underline text-left">See all offers</button>
+            </div>
+        </div>
+
+        <!-- RECOMMENDED PRODUCTS GRID -->
+        <section class="bg-white rounded-sm shadow-sm p-4 mt-4">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Recommended For You</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Product Item -->
+                <div class="product-card p-3 border border-transparent hover:border-gray-200 rounded transition-all cursor-pointer flex flex-col h-full">
+                    <div class="h-40 flex items-center justify-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="max-h-full object-contain" alt="Product">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-medium text-gray-800 line-clamp-2">Minimalist White Watch Analog</h4>
+                        <div class="flex items-center gap-1 mt-1">
+                            <span class="bg-green-600 text-white text-[10px] px-1.5 py-0.5 rounded flex items-center gap-0.5">4.2 <i class="fa-solid fa-star text-[8px]"></i></span>
+                            <span class="text-xs text-gray-500">(1,234)</span>
+                        </div>
+                        <div class="mt-2 flex items-baseline gap-2">
+                            <span class="text-base font-bold text-gray-900">₹1,499</span>
+                            <span class="text-xs text-gray-500 line-through">₹2,999</span>
+                            <span class="text-xs text-green-600 font-bold">50% off</span>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product Item -->
+                 <div class="product-card p-3 border border-transparent hover:border-gray-200 rounded transition-all cursor-pointer flex flex-col h-full">
+                    <div class="h-40 flex items-center justify-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1585386959984-a4155224a14b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="max-h-full object-contain" alt="Product">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-medium text-gray-800 line-clamp-2">Luxury Perfume Gift Set</h4>
+                        <div class="flex items-center gap-1 mt-1">
+                            <span class="bg-green-600 text-white text-[10px] px-1.5 py-0.5 rounded flex items-center gap-0.5">4.5 <i class="fa-solid fa-star text-[8px]"></i></span>
+                            <span class="text-xs text-gray-500">(856)</span>
+                        </div>
+                        <div class="mt-2 flex items-baseline gap-2">
+                            <span class="text-base font-bold text-gray-900">₹899</span>
+                            <span class="text-xs text-gray-500 line-through">₹1,599</span>
+                            <span class="text-xs text-green-600 font-bold">43% off</span>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product Item -->
+                 <div class="product-card p-3 border border-transparent hover:border-gray-200 rounded transition-all cursor-pointer flex flex-col h-full">
+                    <div class="h-40 flex items-center justify-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="max-h-full object-contain" alt="Product">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-medium text-gray-800 line-clamp-2">Smart Watch Series 7 GPS</h4>
+                        <div class="flex items-center gap-1 mt-1">
+                            <span class="bg-green-600 text-white text-[10px] px-1.5 py-0.5 rounded flex items-center gap-0.5">4.7 <i class="fa-solid fa-star text-[8px]"></i></span>
+                            <span class="text-xs text-gray-500">(3,400)</span>
+                        </div>
+                        <div class="mt-2 flex items-baseline gap-2">
+                            <span class="text-base font-bold text-gray-900">₹2,499</span>
+                            <span class="text-xs text-gray-500 line-through">₹4,999</span>
+                            <span class="text-xs text-green-600 font-bold">50% off</span>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product Item -->
+                 <div class="product-card p-3 border border-transparent hover:border-gray-200 rounded transition-all cursor-pointer flex flex-col h-full">
+                    <div class="h-40 flex items-center justify-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="max-h-full object-contain" alt="Product">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-medium text-gray-800 line-clamp-2">Running Sports Sneakers</h4>
+                        <div class="flex items-center gap-1 mt-1">
+                            <span class="bg-green-600 text-white text-[10px] px-1.5 py-0.5 rounded flex items-center gap-0.5">4.0 <i class="fa-solid fa-star text-[8px]"></i></span>
+                            <span class="text-xs text-gray-500">(500)</span>
+                        </div>
+                        <div class="mt-2 flex items-baseline gap-2">
+                            <span class="text-base font-bold text-gray-900">₹1,299</span>
+                            <span class="text-xs text-gray-500 line-through">₹2,499</span>
+                            <span class="text-xs text-green-600 font-bold">48% off</span>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                 <!-- Product Item -->
+                 <div class="product-card p-3 border border-transparent hover:border-gray-200 rounded transition-all cursor-pointer flex flex-col h-full">
+                    <div class="h-40 flex items-center justify-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="max-h-full object-contain" alt="Product">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-medium text-gray-800 line-clamp-2">Noise Cancelling Headphones</h4>
+                        <div class="flex items-center gap-1 mt-1">
+                            <span class="bg-green-600 text-white text-[10px] px-1.5 py-0.5 rounded flex items-center gap-0.5">4.8 <i class="fa-solid fa-star text-[8px]"></i></span>
+                            <span class="text-xs text-gray-500">(120)</span>
+                        </div>
+                        <div class="mt-2 flex items-baseline gap-2">
+                            <span class="text-base font-bold text-gray-900">₹3,999</span>
+                            <span class="text-xs text-gray-500 line-through">₹6,999</span>
+                            <span class="text-xs text-green-600 font-bold">42% off</span>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product Item -->
+                 <div class="product-card p-3 border border-transparent hover:border-gray-200 rounded transition-all cursor-pointer flex flex-col h-full">
+                    <div class="h-40 flex items-center justify-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff23?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="max-h-full object-contain" alt="Product">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-medium text-gray-800 line-clamp-2">Gaming Smartphone 5G</h4>
+                        <div class="flex items-center gap-1 mt-1">
+                            <span class="bg-green-600 text-white text-[10px] px-1.5 py-0.5 rounded flex items-center gap-0.5">4.4 <i class="fa-solid fa-star text-[8px]"></i></span>
+                            <span class="text-xs text-gray-500">(5,600)</span>
+                        </div>
+                        <div class="mt-2 flex items-baseline gap-2">
+                            <span class="text-base font-bold text-gray-900">₹14,999</span>
+                            <span class="text-xs text-gray-500 line-through">₹19,999</span>
+                            <span class="text-xs text-green-600 font-bold">25% off</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#172337] text-white mt-8 text-xs">
+        <div class="container mx-auto px-4 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-8 border-b border-gray-600 pb-8">
+                
+                <!-- Column 1 -->
+                <div>
+                    <h4 class="text-gray-400 uppercase mb-3">About</h4>
+                    <ul class="space-y-2 text-white font-medium">
+                        <li><a href="#" class="hover:underline">Contact Us</a></li>
+                        <li><a href="#" class="hover:underline">About Us</a></li>
+                        <li><a href="#" class="hover:underline">Careers</a></li>
+                        <li><a href="#" class="hover:underline">Flipkart Stories</a></li>
+                        <li><a href="#" class="hover:underline">Press</a></li>
+                        <li><a href="#" class="hover:underline">Corporate Information</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2 -->
+                <div>
+                    <h4 class="text-gray-400 uppercase mb-3">Help</h4>
+                    <ul class="space-y-2 text-white font-medium">
+                        <li><a href="#" class="hover:underline">Payments</a></li>
+                        <li><a href="#" class="hover:underline">Shipping</a></li>
+                        <li><a href="#" class="hover:underline">Cancellation & Returns</a></li>
+                        <li><a href="#" class="hover:underline">FAQ</a></li>
+                        <li><a href="#" class="hover:underline">Report Infringement</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div>
+                    <h4 class="text-gray-400 uppercase mb-3">Policy</h4>
+                    <ul class="space-y-2 text-white font-medium">
+                        <li><a href="#" class="hover:underline">Return Policy</a></li>
+                        <li><a href="#" class="hover:underline">Terms of Use</a></li>
+                        <li><a href="#" class="hover:underline">Security</a></li>
+                        <li><a href="#" class="hover:underline">Privacy</a></li>
+                        <li><a href="#" class="hover:underline">Sitemap</a></li>
+                        <li><a href="#" class="hover:underline">EPR Compliance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 -->
+                <div>
+                    <h4 class="text-gray-400 uppercase mb-3">Social</h4>
+                    <ul class="space-y-2 text-white font-medium">
+                        <li><a href="#" class="hover:underline">Facebook</a></li>
+                        <li><a href="#" class="hover:underline">Twitter</a></li>
+                        <li><a href="#" class="hover:underline">YouTube</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 5 (Mail Us) -->
+                <div class="border-l border-gray-600 pl-4 hidden lg:block">
+                    <h4 class="text-gray-400 uppercase mb-3">Mail Us:</h4>
+                    <p class="leading-5">
+                        Flipkart Internet Private Limited,<br>
+                        Buildings Alyssa, Begonia &<br>
+                        Clove Embassy Tech Village,<br>
+                        Outer Ring Road, Devarabeesanahalli Village,<br>
+                        Bengaluru, 560103,<br>
+                        Karnataka, India
+                    </p>
+                </div>
+                
+                 <!-- Column 6 (Registered Office) -->
+                 <div class="border-l border-gray-600 pl-4 hidden lg:block">
+                    <h4 class="text-gray-400 uppercase mb-3">Registered Office Address:</h4>
+                    <p class="leading-5">
+                        Flipkart Internet Private Limited,<br>
+                        Buildings Alyssa, Begonia &<br>
+                        Clove Embassy Tech Village,<br>
+                        Outer Ring Road, Devarabeesanahalli Village,<br>
+                        Bengaluru, 560103,<br>
+                        Karnataka, India <br>
+                        CIN : U51109KA2012PTC066107<br>
+                        Telephone: <span class="text-fk-blue">1800 202 9898</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-store text-yellow-400"></i>
+                    <span class="font-medium">Become a Seller</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <span class="font-medium">Advertise</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-gift text-yellow-400"></i>
+                    <span class="font-medium">Gift Cards</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-headset text-yellow-400"></i>
+                    <span class="font-medium">Help Center</span>
+                </div>
+                <div>
+                    &copy; 2007-2026 Flipkart.com
+                </div>
+
+A                <div class="hidden md:block">
+                    <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/payment-method_69e7ec.svg" alt="Payment Methods" class="h-4">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT FOR SLIDER -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('#hero-slider > div');
+        const totalSlides = slides.length;
+        const sliderContainer = document.getElementById('hero-slider');
+
+        function updateSlider() {
+            sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        // Auto slide
+        setInterval(nextSlide, 4000);
+    </script>
+</body>
+</html>
+
+
+
